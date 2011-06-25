@@ -199,11 +199,5 @@ public class Pista {
     	else{
     	return a.getCoordenadaActual().equals(this.tesoroBlanco);}
      }
-     
-     
-     public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
 
 }
