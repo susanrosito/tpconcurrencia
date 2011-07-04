@@ -1,5 +1,6 @@
 package tablero;
 
+import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,7 +76,7 @@ public class Tablero {
 		List<String> filaActual = this.getMatriz().get(coord.getFila());
 		
 		filaActual.remove(coord.getColumna());
-		filaActual.add(coord.getColumna(),"-");
+		filaActual.add(coord.getColumna(),"[]");
 	}
 	/**
 	 * Este metodo Imprime el Tablero. Nos muesta su contenido. 
@@ -142,8 +143,8 @@ public class Tablero {
 	public void dibujarTesoros(Pista pista){
 		Coordenada tesoroA = pista.tesoroAzul;
 		Coordenada tesoroB = pista.tesoroBlanco;
-		agregarElemento(tesoroA, "AA");	
-		agregarElemento(tesoroB,"BB");
+		agregarElemento(tesoroA, "aa");	
+		agregarElemento(tesoroB,"bb");
 		
 	}
 	public int getAncho() {
@@ -195,8 +196,47 @@ public List<Coordenada> coordDeUnaFila(int nroColum){
 		return respuesta;
 	}
 public static void main(String[] args) {
+	// ESTO ES REALMENTE ESPANTOSO !!! :P MIRA TODO LO QUE TUBE QUE ESCRIBIR JEJE :P
+	// YA TENGO LO DE CONSOLA!! ESTA RE BUENO.. LUEGO LO INCORPORO!
 	Tablero actual = new Tablero(10,10);
 	Pista nivel = new Pista();
+	Coordenada ee = new Coordenada();
+	ee.setColumna(6);
+	ee.setFila(7);
+	Coordenada tt = new Coordenada();
+	tt.setColumna(3);
+	tt.setFila(1);
+	Coordenada ii = new Coordenada();
+	ii.setColumna(5);
+	ii.setFila(7);
+	
+	Auto auto1 = new Auto("Blanco", ee);
+	Auto auto2 = new Auto("Blanco", tt);
+	Auto auto3 = new Auto("Blanco", ii);
+	List<Auto> autosAzu = new ArrayList<Auto>();
+	
+	List<Auto> autosBla = new ArrayList<Auto>();
+	autosBla.add(auto1);
+	autosBla.add(auto2);
+	autosBla.add(auto3);
+	
+	Coordenada oo = new Coordenada();
+	oo.setColumna(5);
+	oo.setFila(3);
+	Coordenada pp = new Coordenada();
+	pp.setColumna(2);
+	pp.setFila(1);
+	Coordenada yy = new Coordenada();
+	yy.setColumna(2);
+	yy.setFila(7);
+	
+	Auto auto5 = new Auto("Azul", oo);
+	Auto auto6 = new Auto("Azul", pp);
+	Auto auto7 = new Auto("Azul", yy);
+	autosAzu.add(auto5);
+	autosAzu.add(auto6);
+	autosAzu.add(auto7);
+	
 	List<Coordenada> taculos = new ArrayList<Coordenada>();
 	List<Coordenada> paredes = new ArrayList<Coordenada>();
 	List<Coordenada> etaculos = new ArrayList<Coordenada>();
@@ -210,7 +250,15 @@ public static void main(String[] args) {
 	taculos.addAll(eparedes);
 	taculos.addAll(etaculos);
 	nivel.paredes = taculos;
-
+	Coordenada gg = new Coordenada();
+	gg.setColumna(3);
+	gg.setFila(4);
+	nivel.tesoroAzul = gg; 
+	Coordenada hh = new Coordenada();
+	hh.setColumna(8);
+	hh.setFila(8);
+	nivel.tesoroBlanco = hh; 
+	
 	Coordenada coord = new Coordenada();
 	coord.setColumna(2);
 	coord.setFila(3);
@@ -236,9 +284,12 @@ public static void main(String[] args) {
 	coord5.setColumna(4);
 	obsta.add(coord5);
 	nivel.obstaculos = obsta;
+	nivel.AutosAzules = autosAzu;
+	nivel.AutosBlancos = autosBla;
 	actual.dibujarParedes(nivel);
 	actual.dibujarObstaculos(nivel);
-	
+	actual.dibujarAutos(nivel);
+	actual.dibujarTesoros(nivel);
 	actual.imprimirTablero();
 }
 	
