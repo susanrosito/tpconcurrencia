@@ -95,21 +95,11 @@ public class Tablero {
 	 * Este metodo Dibuja la Pista que le pasan por parametro. 
 	 */
 	public void dibujarPista(Pista pista){
-		dibujarParedes(pista);
 		dibujarAutos(pista);
 		dibujarObstaculos(pista);
 		dibujarTesoros(pista);
 	}
-	/**
-	 * Este metodo Dibuja las Paredes de la Pista que le pasan por parametro. 
-	 */
-	public void dibujarParedes(Pista pista){
-		List<Coordenada> paredes  = pista.paredes;
-		for (int i = 0; i< paredes.size(); i++) {
-			Coordenada coord = paredes.get(i);
-			agregarElemento(coord, "* ");
-		}
-	}
+	
 	/**
 	 * Este metodo Dibuja los Autos de la Pista que le pasan por parametro. 
 	 */
@@ -174,10 +164,8 @@ public class Tablero {
 		List<Coordenada> respuesta = new ArrayList<Coordenada>();
 		if (nroFila <= alto){
 			for (int i = 0; i < ancho; i++) {
-				Coordenada coord = new Coordenada();
-				coord.setFila(nroFila);
-				coord.setColumna(i);
-				respuesta.add(coord);
+				Coordenada coord = new Coordenada(nroFila,i);
+				 respuesta.add(coord);
 			}
 		}
 		return respuesta;
@@ -187,9 +175,7 @@ public List<Coordenada> coordDeUnaFila(int nroColum){
 		List<Coordenada> respuesta = new ArrayList<Coordenada>();
 		if (nroColum <= ancho){
 			for (int i = 0; i < alto; i++) {
-				Coordenada coord = new Coordenada();
-				coord.setFila(i);
-				coord.setColumna(nroColum);
+				Coordenada coord = new Coordenada(i,nroColum);
 				respuesta.add(coord);
 			}
 		}
@@ -200,97 +186,69 @@ public static void main(String[] args) {
 	// YA TENGO LO DE CONSOLA!! ESTA RE BUENO.. LUEGO LO INCORPORO!
 	Tablero actual = new Tablero(10,10);
 	Pista nivel = new Pista();
-	Coordenada ee = new Coordenada();
-	ee.setColumna(6);
-	ee.setFila(7);
-	Coordenada tt = new Coordenada();
-	tt.setColumna(3);
-	tt.setFila(1);
-	Coordenada ii = new Coordenada();
-	ii.setColumna(5);
-	ii.setFila(7);
-	
-	Auto auto1 = new Auto("Blanco", ee);
-	Auto auto2 = new Auto("Blanco", tt);
-	Auto auto3 = new Auto("Blanco", ii);
-	List<Auto> autosAzu = new ArrayList<Auto>();
-	
-	List<Auto> autosBla = new ArrayList<Auto>();
-	autosBla.add(auto1);
-	autosBla.add(auto2);
-	autosBla.add(auto3);
-	
-	Coordenada oo = new Coordenada();
-	oo.setColumna(5);
-	oo.setFila(3);
-	Coordenada pp = new Coordenada();
-	pp.setColumna(2);
-	pp.setFila(1);
-	Coordenada yy = new Coordenada();
-	yy.setColumna(2);
-	yy.setFila(7);
-	
-	Auto auto5 = new Auto("Azul", oo);
-	Auto auto6 = new Auto("Azul", pp);
-	Auto auto7 = new Auto("Azul", yy);
-	autosAzu.add(auto5);
-	autosAzu.add(auto6);
-	autosAzu.add(auto7);
-	
-	List<Coordenada> taculos = new ArrayList<Coordenada>();
-	List<Coordenada> paredes = new ArrayList<Coordenada>();
-	List<Coordenada> etaculos = new ArrayList<Coordenada>();
-	List<Coordenada> eparedes = new ArrayList<Coordenada>();
-	List<Coordenada> obsta = new ArrayList<Coordenada>();
-	taculos = actual.coordDeUnaColumna(0);
-	paredes = actual.coordDeUnaFila(0);
-	etaculos = actual.coordDeUnaColumna(9);
-	eparedes = actual.coordDeUnaFila(9);
-	taculos.addAll(paredes);
-	taculos.addAll(eparedes);
-	taculos.addAll(etaculos);
-	nivel.paredes = taculos;
-	Coordenada gg = new Coordenada();
-	gg.setColumna(3);
-	gg.setFila(4);
-	nivel.tesoroAzul = gg; 
-	Coordenada hh = new Coordenada();
-	hh.setColumna(8);
-	hh.setFila(8);
-	nivel.tesoroBlanco = hh; 
-	
-	Coordenada coord = new Coordenada();
-	coord.setColumna(2);
-	coord.setFila(3);
-	obsta.add(coord);
-	
-	Coordenada coord2 = new Coordenada();
-	coord2.setFila(4);
-	coord2.setColumna(2);
-	obsta.add(coord2);
-	
-	Coordenada coord3 = new Coordenada();
-	coord3.setFila(5);
-	coord3.setColumna(2);
-	obsta.add(coord3);
-	
-	Coordenada coord4 = new Coordenada();
-	coord4.setFila(5);
-	coord4.setColumna(3);
-	obsta.add(coord4);
-	
-	Coordenada coord5 = new Coordenada();
-	coord5.setFila(5);
-	coord5.setColumna(4);
-	obsta.add(coord5);
-	nivel.obstaculos = obsta;
-	nivel.AutosAzules = autosAzu;
-	nivel.AutosBlancos = autosBla;
-	actual.dibujarParedes(nivel);
-	actual.dibujarObstaculos(nivel);
-	actual.dibujarAutos(nivel);
-	actual.dibujarTesoros(nivel);
-	actual.imprimirTablero();
+	Coordenada ee = new Coordenada(7,6);
+	Coordenada tt = new Coordenada(1,3);
+	Coordenada ii = new Coordenada(7,5);
+
+//	
+//	//Auto auto1 = new Auto("Blanco", ee);
+//	//Auto auto2 = new Auto("Blanco", tt);
+//	//Auto auto3 = new Auto("Blanco", ii);
+//	List<Auto> autosAzu = new ArrayList<Auto>();
+//	
+//	List<Auto> autosBla = new ArrayList<Auto>();
+//	//autosBla.add(auto1);
+//	//autosBla.add(auto2);
+//	//autosBla.add(auto3);
+//	Coordenada oo = new Coordenada(3,5);
+//	Coordenada pp = new Coordenada(1,2);
+//
+//	Coordenada yy = new Coordenada(7,2);
+//
+//	
+//	Auto auto5 = new Auto("Azul", oo);
+//	Auto auto6 = new Auto("Azul", pp);
+//	Auto auto7 = new Auto("Azul", yy);
+//	autosAzu.add(auto5);
+//	autosAzu.add(auto6);
+//	autosAzu.add(auto7);
+//	
+//	List<Coordenada> taculos = new ArrayList<Coordenada>();
+//	List<Coordenada> paredes = new ArrayList<Coordenada>();
+//	List<Coordenada> etaculos = new ArrayList<Coordenada>();
+//	List<Coordenada> eparedes = new ArrayList<Coordenada>();
+//	List<Coordenada> obsta = new ArrayList<Coordenada>();
+//	
+//	Coordenada gg = new Coordenada(4,3);
+//	nivel.tesoroAzul = gg; 
+//	Coordenada hh = new Coordenada(8,8);
+//	nivel.tesoroBlanco = hh; 
+//	
+//	Coordenada coord = new Coordenada(3,2);
+//	obsta.add(coord);
+//	
+//	Coordenada coord2 = new Coordenada(4,2);
+//	obsta.add(coord2);
+//	
+//	Coordenada coord3 = new Coordenada(5,2);
+//	obsta.add(coord3);
+//	
+//	Coordenada coord4 = new Coordenada(5,3);
+//
+//	obsta.add(coord4);
+//	
+//	Coordenada coord5 = new Coordenada(5,4);
+//	coord5.setFila(5);
+//	coord5.setColumna(4);
+//	obsta.add(coord5);
+//	nivel.obstaculos = obsta;
+//	nivel.AutosAzules = autosAzu;
+//	nivel.AutosBlancos = autosBla;
+//	
+//	actual.dibujarObstaculos(nivel);
+//	actual.dibujarAutos(nivel);
+//	actual.dibujarTesoros(nivel);
+//	actual.imprimirTablero();
 }
 	
 
