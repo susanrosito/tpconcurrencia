@@ -1,11 +1,15 @@
 package tablero;
 
 import Direcciones.Direccion;
-
-public class Coordenada {
+public class Coordenada{
 
 	int fila;
 	int columna;
+
+	public Coordenada(int i, int j) {
+		fila = i;
+		columna = j;
+	}
 
 	/**
 	 * Este metodo devuelve una coordenada, que es la siguiente coordenada segun
